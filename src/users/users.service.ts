@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { BCRYPT } from 'src/constants/enums/bcrypt';
+import { BCRYPT } from 'src/constants/enums/bcrypt/bcrypt';
 import {
   TokenException,
   UserCreateException,
@@ -10,7 +10,7 @@ import {
 } from 'src/exceptions/custom.exceptions';
 import { JwtService } from '@nestjs/jwt';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { EMAIL } from 'src/constants/enums/email';
+import { EMAIL } from 'src/constants/enums/email/email';
 import { EmailService } from 'src/email/email.service';
 
 @Injectable()
@@ -92,7 +92,7 @@ export class UsersService {
     });
   }
 
-  async removeOverdue(usersToDelete) {
-    return await this.prisma.user.delete(usersToDelete);
+  async removeOverdue(user_id: number) {
+    return await this.prisma.user.delete({ where: { user_id } });
   }
 }
