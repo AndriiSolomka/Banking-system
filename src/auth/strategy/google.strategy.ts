@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { AuthService } from '../auth.service';
-import { BCRYPT } from 'src/constants/enums/bcrypt';
+import { BCRYPT } from 'src/constants/enums/bcrypt/bcrypt';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -27,7 +27,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       email: profile.emails[0].value,
       username: profile.displayName,
       password: bcrypt.hashSync('randomSecurePassword', BCRYPT.SALT),
-      isEmailConfirmed: profile.emails[0].verified,
+      is_email_confirm: profile.emails[0].verified,
     };
     const validateUser = await this.authService.validateGoogleUser(user);
     done(null, validateUser);
