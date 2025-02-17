@@ -18,8 +18,8 @@ model User {
 
   accounts              Account[]
   deposits              Deposit[]
-  transactions          SentTransaction[]     @relation("UserSentTransactions")
-  received_transactions ReceivedTransaction[] @relation("UserReceivedTransactions")
+  transactions          SentTransaction[]
+  received_transactions ReceivedTransaction[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -34,8 +34,8 @@ model Account {
   balance    Decimal  @default(0.0)
   currency   Currency
 
-  transactions          SentTransaction[]     @relation("AccountSentTransactions")
-  received_transactions ReceivedTransaction[] @relation("AccountReceivedTransactions")
+  transactions          SentTransaction[]
+  received_transactions ReceivedTransaction[]
   deposits              Deposit[]
 
   created_at DateTime @default(now())
@@ -64,9 +64,9 @@ model Deposit {
 model SentTransaction {
   transaction_id    Int      @id @default(autoincrement())
   sender_id         Int
-  sender            User     @relation("UserSentTransactions", fields: [sender_id], references: [user_id], onDelete: Cascade)
+  sender            User     @relation(fields: [sender_id], references: [user_id], onDelete: Cascade)
   sender_account_id Int
-  sender_account    Account  @relation("AccountSentTransactions", fields: [sender_account_id], references: [account_id], onDelete: Cascade)
+  sender_account    Account  @relation(fields: [sender_account_id], references: [account_id], onDelete: Cascade)
   amount            Decimal
   currency          Currency
   created_at        DateTime @default(now())
@@ -77,9 +77,9 @@ model SentTransaction {
 model ReceivedTransaction {
   transaction_id      Int      @id @default(autoincrement())
   receiver_id         Int
-  receiver            User     @relation("UserReceivedTransactions", fields: [receiver_id], references: [user_id], onDelete: Cascade)
+  receiver            User     @relation(fields: [receiver_id], references: [user_id], onDelete: Cascade)
   receiver_account_id Int
-  receiver_account    Account  @relation("AccountReceivedTransactions", fields: [receiver_account_id], references: [account_id], onDelete: Cascade)
+  receiver_account    Account  @relation(fields: [receiver_account_id], references: [account_id], onDelete: Cascade)
   amount              Decimal
   currency            Currency
   created_at          DateTime @default(now())
