@@ -6,7 +6,6 @@ import { CookieModule } from './cookie/cookie.module';
 import { EmailModule } from './email/email.module';
 import { ScheduleModule } from './schedule/schedule.module';
 import { AccountsModule } from './accounts/accounts.module';
-import { RolesModule } from './roles/roles.module';
 import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
@@ -18,7 +17,6 @@ import { TransactionsModule } from './transactions/transactions.module';
     EmailModule,
     ScheduleModule,
     AccountsModule,
-    RolesModule,
     TransactionsModule,
   ],
 })
