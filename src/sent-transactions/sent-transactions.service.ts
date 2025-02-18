@@ -6,7 +6,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class SentTransactionsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async logTransaction(transaction: ILogSentTransaction) {
+  async create(transaction: ILogSentTransaction) {
     return await this.prisma.sentTransaction.create({
       data: {
         sender_id: transaction.senderId,

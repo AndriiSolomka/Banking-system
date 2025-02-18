@@ -44,14 +44,14 @@ export class TransactionsService {
         convertedAmount,
       );
 
-      await this.sentTransactionsService.logTransaction({
+      await this.sentTransactionsService.create({
         senderId,
         senderAccountId,
         amount,
         currency: sender.currency,
       });
 
-      await this.receivedTransactionsService.logTransaction({
+      await this.receivedTransactionsService.create({
         receiverId: receiver.user_id,
         receiverAccountId,
         amount: convertedAmount,
