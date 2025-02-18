@@ -3,8 +3,8 @@ import { SentTransactionsService } from './sent-transactions.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
-  imports:[PrismaModule],
+  imports: [PrismaModule],
   providers: [SentTransactionsService],
-  exports:[SentTransactionsService]
+  exports: [SentTransactionsService],
 })
 export class SentTransactionsModule {}
