@@ -4,6 +4,7 @@ WORKDIR /home/node/app
 COPY --chown=node:node package*.json ./
 USER node
 RUN npm install
-COPY --chown=node:node . .
+COPY . .
+RUN npx prisma generate --schema ./prisma/schema.prisma
 EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD [ "npm", "start", "start:dev" ]
