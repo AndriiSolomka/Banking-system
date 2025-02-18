@@ -43,8 +43,8 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Get(':userId')
-  async getOneUser(@Param('userId') id: string) {
-    return await this.usersService.findOneById(+id);
+  async getOneFullInfo(@Param('userId') id: string) {
+    return await this.usersService.findFullInfoById(+id);
   }
 
   @UseGuards(JwtAuthGuard, AdminGuard)
@@ -52,7 +52,9 @@ export class UsersController {
   async getBlocked(
     @Param('userId') id: string,
     @Body() updateUsersDto: UpdateUserDto,
+    @Response() res,
   ) {
-    return await this.usersService.update(+id, updateUsersDto);
+    this.cookieService.setUserCookie(res, '');
+    return res.send(await this.usersService.update(+id, updateUsersDto));
   }
 }
