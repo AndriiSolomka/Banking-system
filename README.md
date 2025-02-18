@@ -1,6 +1,6 @@
 ## 1. Clone repository
 ```bash
-https://github.com/AndriiSolomka/Banking-system.git
+git clone https://github.com/AndriiSolomka/Banking-system.git
 ```
 ## 2.  Copy ```.env.example``` to your .env
 
