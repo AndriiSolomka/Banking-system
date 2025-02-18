@@ -32,7 +32,10 @@ export class UsersService {
         password: hashPassword,
       },
     });
+
     if (!user) throw new UserCreateException();
+    if (user.is_blocked) throw new UserCreateException();
+
     const payload = {
       user_id: user.user_id,
       sub: user.user_id,
@@ -68,6 +71,8 @@ export class UsersService {
     const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user) throw new UserNotFoundException();
     if (!user.is_email_confirm) throw new EmailConfirmException();
+    if (user.is_blocked) throw new UserNotFoundException();
+
     return user;
   }
 
@@ -80,7 +85,7 @@ export class UsersService {
         data: profile,
       });
     }
-
+    if (user.is_blocked) throw new UserCreateException();
     return user;
   }
 
@@ -107,5 +112,20 @@ export class UsersService {
 
   async getAllUsers() {
     return await this.prisma.user.findMany();
+  }
+
+  async findFullInfoById(id: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { user_id: id },
+      include: {
+        accounts: true,
+        deposits: true,
+        transactions: true,
+        received_transactions: true,
+      },
+    });
+
+    if (!user) throw new UserNotFoundException();
+    return user;
   }
 }
