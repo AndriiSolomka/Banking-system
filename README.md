@@ -16,6 +16,7 @@ docker-compose up --build -d
 
 ```bash
 docker exec -it node-server sh
+npx prisma generate
 npx prisma migrate deploy
 ```
 ## 5. Open docimentation
