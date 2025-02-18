@@ -1,6 +1,10 @@
-## 1  Copy ```.env.example``` to your .env
+## 1. Clone repository
+```bash
+https://github.com/AndriiSolomka/Banking-system.git
+```
+## 2.  Copy ```.env.example``` to your .env
 
-## 2. Start Docker
+## 3. Start Docker
 
 To apply the changes to the database URL, follow these steps to restart the containers:
 
@@ -8,13 +12,13 @@ To apply the changes to the database URL, follow these steps to restart the cont
 docker-compose up --build -d
 ```
 
-## 3. Make Prisma migrations
+## 4. Make Prisma migrations
 
 ```bash
 docker exec -it node-server sh
 npx prisma migrate deploy
 ```
-## 3. Open docimentation
+## 5. Open docimentation
 
 ```bash
 http://localhost:3000/api
